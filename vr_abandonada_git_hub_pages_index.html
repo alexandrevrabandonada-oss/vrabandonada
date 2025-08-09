@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VR Abandonada</title>
+  <meta name="description" content="VR Abandonada – posts e jogos, estética industrial de Volta Redonda." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Tailwind via CDN (prático para GitHub Pages) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vrYellow: '#F7C624',
+            vrBlack: '#0E0E0E',
+            vrGray: '#1A1A1A'
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* suavizar scroll */
+    html{scroll-behavior:smooth}
+  </style>
+</head>
+<body class="bg-vrBlack text-white font-sans">
+  <!-- Header / Hero -->
+  <header class="relative">
+    <div class="relative h-[56vh] min-h-[420px] w-full bg-vrGray">
+      <!-- Troque o caminho abaixo após subir sua imagem para /assets/hero.jpg -->
+      <img src="assets/hero.jpg" alt="VR Abandonada" class="absolute inset-0 w-full h-full object-cover opacity-70">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"></div>
+      <div class="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-between px-6 py-8">
+        <nav class="flex items-center justify-between">
+          <a href="#topo" class="text-vrYellow text-4xl font-display tracking-widest drop-shadow-lg">VR ABANDONADA</a>
+          <ul class="flex gap-6 text-lg">
+            <li><a href="#posts" class="hover:text-vrYellow transition">Posts</a></li>
+            <li><a href="#jogos" class="hover:text-vrYellow transition">Jogos</a></li>
+          </ul>
+        </nav>
+        <div class="pb-6">
+          <h1 class="font-display text-6xl sm:text-7xl text-vrYellow leading-none">Volta Redonda, ferro e memória</h1>
+          <p class="mt-2 max-w-2xl text-neutral-200">Estética industrial em amarelo e preto. Posts do Instagram e jogos autorais em um só lugar.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <main class="max-w-6xl mx-auto px-6">
+    <!-- Posts -->
+    <section id="posts" class="pt-12">
+      <h2 class="font-display text-5xl text-vrYellow mb-4">Posts</h2>
+      <p class="text-neutral-300 mb-6">Cole abaixo links de posts do Instagram (um por linha) e clique em <strong>Atualizar</strong>. O site salva no seu navegador (localStorage). Para fixar no código, edite o array <code>INSTAGRAM_URLS</code> no fim deste arquivo.</p>
+
+      <div class="bg-black/40 border border-white/10 rounded-2xl p-4 mb-6">
+        <textarea id="insta-input" rows="4" placeholder="https://www.instagram.com/p/XXXXXXXXX/\nhttps://www.instagram.com/reel/YYYYYYYYY/" class="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-sm outline-none focus:border-vrYellow"></textarea>
+        <div class="mt-3 flex items-center gap-3">
+          <button id="insta-save" class="px-4 py-2 rounded-xl bg-vrYellow text-black font-semibold">Atualizar</button>
+          <button id="insta-clear" class="px-4 py-2 rounded-xl border border-white/20 hover:border-white/40">Limpar embeds</button>
+        </div>
+      </div>
+
+      <div id="insta-list" class="grid sm:grid-cols-2 gap-6"></div>
+      <!-- Script oficial do Instagram para embeds -->
+      <script async src="https://www.instagram.com/embed.js"></script>
+    </section>
+
+    <!-- Jogos -->
+    <section id="jogos" class="pt-16 pb-24">
+      <h2 class="font-display text-5xl text-vrYellow mb-4">Jogos</h2>
+      <p class="text-neutral-300 mb-6">Cards puxados do array <code>GAMES</code>. Edite título, descrição, imagem e link.</p>
+      <div id="games-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 bg-black/60">
+    <div class="max-w-6xl mx-auto px-6 py-8 text-sm text-neutral-400 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+      <span>© <span id="year"></span> VR Abandonada</span>
+      <span>Feito com ❤️ e amarelo & preto</span>
+    </div>
+  </footer>
+
+  <!-- ====== Dados editáveis ====== -->
+  <script>
+    // 1) Posts do Instagram – coloque aqui seus links para versionar no GitHub
+    const INSTAGRAM_URLS = [
+      // Exemplo:
+      // 'https://www.instagram.com/p/XXXXXXXXX/',
+      // 'https://www.instagram.com/reel/YYYYYYYYY/'
+    ];
+
+    // 2) Jogos – edite à vontade
+    const GAMES = [
+      {
+        title: 'Operário 8‑bit',
+        description: 'Prototype: avatar pixel art correndo pela cidade industrial.',
+        image: 'assets/jogos/operario-8bit.jpg', // troque após subir a imagem
+        link: '#'
+      },
+      {
+        title: 'VR Runner',
+        description: 'Desvie dos “processos” do advogado da CSN e sobreviva na fábrica.',
+        image: 'assets/jogos/vr-runner.jpg',
+        link: '#'
+      }
+    ];
+  </script>
+
+  <!-- ====== Lógica do site (simples) ====== -->
+  <script>
+    const yearEl = document.getElementById('year');
+    yearEl.textContent = new Date().getFullYear();
+
+    // ---------- Instagram ----------
+    const key = 'vrabandonada_insta_urls_v1';
+    const instaInput = document.getElementById('insta-input');
+    const instaList = document.getElementById('insta-list');
+    const btnSave = document.getElementById('insta-save');
+    const btnClear = document.getElementById('insta-clear');
+
+    function loadUrls() {
+      const saved = JSON.parse(localStorage.getItem(key) || 'null');
+      return saved && Array.isArray(saved) ? saved : INSTAGRAM_URLS;
+    }
+
+    function renderEmbeds(urls) {
+      instaList.innerHTML = '';
+      urls.forEach(url => {
+        const safe = String(url).trim();
+        if(!safe) return;
+        const card = document.createElement('div');
+        card.className = 'bg-black/40 border border-white/10 rounded-2xl p-3';
+        card.innerHTML = `
+          <blockquote class="instagram-media" data-instgrm-permalink="${safe}" data-instgrm-version="14" style="margin:0 auto; max-width:540px; width:100%;"></blockquote>
+        `;
+        instaList.appendChild(card);
+      });
+      if (window.instgrm && window.instgrm.Embeds) {
+        window.instgrm.Embeds.process();
+      }
+    }
+
+    function bootstrapInsta() {
+      const urls = loadUrls();
+      instaInput.value = urls.join('\n');
+      renderEmbeds(urls);
+    }
+
+    btnSave.addEventListener('click', () => {
+      const urls = instaInput.value.split(/\n+/).map(s => s.trim()).filter(Boolean);
+      localStorage.setItem(key, JSON.stringify(urls));
+      renderEmbeds(urls);
+    });
+
+    btnClear.addEventListener('click', () => {
+      localStorage.removeItem(key);
+      instaInput.value = INSTAGRAM_URLS.join('\n');
+      renderEmbeds(INSTAGRAM_URLS);
+    });
+
+    // ---------- Jogos ----------
+    const gamesGrid = document.getElementById('games-grid');
+    function renderGames() {
+      gamesGrid.innerHTML = '';
+      GAMES.forEach(g => {
+        const el = document.createElement('article');
+        el.className = 'rounded-2xl overflow-hidden border border-white/10 bg-black/40 flex flex-col';
+        el.innerHTML = `
+          <div class="aspect-video bg-vrGray">
+            <img src="${g.image}" alt="${g.title}" class="w-full h-full object-cover" onerror="this.style.display='none'">
+          </div>
+          <div class="p-4 flex-1 flex flex-col gap-2">
+            <h3 class="font-semibold text-xl">${g.title}</h3>
+            <p class="text-sm text-neutral-300 flex-1">${g.description}</p>
+            <div class="pt-2">
+              <a href="${g.link}" target="_blank" rel="noopener" class="inline-block px-4 py-2 rounded-xl bg-vrYellow text-black font-semibold hover:opacity-90">Jogar / Baixar</a>
+            </div>
+          </div>
+        `;
+        gamesGrid.appendChild(el);
+      });
+    }
+
+    // Init
+    bootstrapInsta();
+    renderGames();
+  </script>
+</body>
+</html>
